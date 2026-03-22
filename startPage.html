@@ -1,196 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My portofolio</title>
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
-<body>  
+<body>
     <header>
-    <h1>My portofolio</h1>
-    <nav>
-         <ul style="display: flex; list-style-type: none; gap: 20px;">
-            <li><a href="startPage.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="skills.html" >Skills</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+        <h1 class="title">My Portfolio</h1>
+        <nav class="navbar" aria-label="Main navigation">
+            <ul>
+                <li><a href="startPage.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <h2> My name is Maria, I am a second-year computer engineering student willing to learn and grow.</h2>
-    
-    <nav>
-    <p>Jump to milestone:</p>
-    <ul style="display:flex; gap:15px; list-style:none; padding:0;">
-        <li><a href="#passions">My Passions</a></li>
-        <li><a href="#offSchool">Off-School Activities</a></li>
-        <li><a href="#milestones">Milestones</a></li>
-        <li><a href="#myWorkspace">My Workspace</a></li>
-    </ul>
-    </nav>
+    <main class="page-content">
+        <section class="section-card">
+            <h2 class="lead">My name is Maria, I am a second-year computer engineering student willing to learn and grow.</h2>
 
-    <section>
-    <h3 id="passions">My passions include:</h3>
+            <nav class="jump-nav" aria-label="Page sections">
+                <p>Jump to section:</p>
+                <div class="pills-container">
+                    <a href="#passions" class="pill">My Passions</a>
+                    <a href="#offSchool" class="pill">Off-School Activities</a>
+                    <a href="#milestones" class="pill">Milestones</a>
+                    <a href="#myWorkspace" class="pill">My Workspace</a>
+                </div>
+            </nav>
+        </section>
 
-    <details>
-        <summary>GUI Development</summary>
-        <p>I love creating beautiful and intuitive user interfaces using JavaFX and modern frameworks.</p>
-    </details>
-    
-    <details>
-        <summary>Hardware and Software Development</summary>
-        <p>Working with both software and hardware to create integrated solutions...</p>
-    </details>
+        <section class="section-card">
+            <h3 id="passions">My passions include:</h3>
 
-    <details>
-        <summary>Simulation</summary>
-        <p>Designing and implementing simulations to model real-world systems and processes.</p>
-    
-    <details>
-        <summary>Logical Reasoning</summary>
-        <p>I enjoy solving complex problems and developing logical solutions.</p>
-    </details>
-    </section>
+            <details>
+                <summary>GUI Development</summary>
+                <p>I love creating beautiful and intuitive user interfaces using JavaFX and modern frameworks.</p>
+            </details>
 
-    <h3 id="offSchool"> Some of my off school activities:</h3>
+            <details>
+                <summary>Hardware and Software Development</summary>
+                <p>Working with both software and hardware to create integrated solutions.</p>
+            </details>
 
-    <section>
-        <dl>
-        <dt><b>Image Forgery Detection</b></dt>
-            <dd>A course focused on detecting forged images using various techniques and technologies.</dd>
-            <dd>Skills acquired: Image processing, machine learning, and computer vision.</dd>
-            <dd>Tools used: Python, OpenCV, and TensorFlow.</dd>
-        <dt><b>Introduction to Embedded Systems</b></dt>
-            <dd>An online course introducing the fundamentals of embedded systems design and programming by Marquardt.</dd>
-        <dt><b>Microcontroller Programming</b></dt>
-            <dd>A course focused on programming microcontrollers.</dd>
-            <dd>Learned to program microcontrollers by coding a room temperature reader using an Arduino board and a temperature sensor.</dd>
-        <dt><b>IFM Labz</b></dt>
-            <dd>Participated in the IFM Labz program, which provides hands-on experience in hardware and softwaredevelopment.</dd>
-            <dd>Developing a gaming console using a Raspberry Pi Pico W that features a unique secret information system.</dd>
-            <dd>Gained practical skills and knowledge through the project and workshops.</dd>  
-        </dl>
-    </section>
+            <details>
+                <summary>Simulation</summary>
+                <p>Designing and implementing simulations to model real-world systems and processes.</p>
+            </details>
 
-    <h3 id="milestones">Milestones</h3>
-    <table>
-        <tr>
-            <th>Milestone</th>
-            <th>Description</th>
-            <th>Technologies</th>
-            <th>Year</th>
-        </tr>
-        <tbody>
-        <tr>
-            <td>First Programming Course</td>
-            <td>Mathematics & Informatics profile in high school, basic algorithms, data structures and OOP basic principles.</td>
-            <td>C++</td>
-            <td>2020-2024</td>
-        </tr>
+            <details>
+                <summary>Logical Reasoning</summary>
+                <p>I enjoy solving complex problems and developing logical solutions.</p>
+            </details>
+        </section>
 
-        <tr>
-            <td>Microcontroller Programming</td>
-            <td>Learned to program microcontrollers by creating a room temperature reader using an Arduino board and a temperature sensor.</td>
-            <td>Arduino, C++</td>
-            <td>2022</td>
-        </tr>
+        <section class="section-card activity">
+            <h3 id="offSchool">Some of my off-school activities:</h3>
+            <dl>
+                <dt>Image Forgery Detection</dt>
+                <dd>A course focused on detecting forged images using various techniques and technologies.</dd>
+                <dd>Skills acquired: image processing, machine learning, and computer vision.</dd>
+                <dd>Tools used: Python, OpenCV, and TensorFlow.</dd>
 
-        <tr>
-            <td>Introduction to Embedded Systems</td>
-            <td>Learned the fundamentals of embedded systems design and programming.</td>
-            <td>Arduino, C++</td>
-            <td>2022</td>
-        </tr>
+                <dt>Introduction to Embedded Systems</dt>
+                <dd>An online course introducing the fundamentals of embedded systems design and programming.</dd>
 
-        <tr>
-            <td>Transdisciplinary projects with classmates</td>
-            <td>Collaborated on projects that combined knowledge from different disciplines.</td>
-            <td>C++, Python</td>
-            <td>2024</td>
-        </tr>
+                <dt>Microcontroller Programming</dt>
+                <dd>A course focused on programming microcontrollers.</dd>
+                <dd>Built a room temperature reader using an Arduino board and a temperature sensor.</dd>
 
-        <tr>
-            <td>Computer Science University</td>
-            <td>Continued my studies in computer science, focusing on advanced programming and software development.</td>
-            <td>C++, Java, Python</td>
-            <td>2024-present</td>
-        </tr>
+                <dt>IFM Labz</dt>
+                <dd>Participated in the IFM Labz program, with hands-on experience in hardware and software development.</dd>
+                <dd>Developed a gaming console using a Raspberry Pi Pico W with a secret information system.</dd>
+                <dd>Gained practical skills through project work and workshops.</dd>
+            </dl>
+        </section>
 
-        <tr>
-            <td>Learning Java</td>
-            <td>Started to learn Java programming from a book, focusing on the basics and core concepts.</td>
-            <td>Java</td>
-            <td>2025</td>
-        </tr>
+        <section class="section-card">
+            <h3 id="milestones">Milestones</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Milestone</th>
+                        <th>Description</th>
+                        <th>Technologies</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First Programming Course</td>
+                        <td>Mathematics and Informatics profile in high school, basic algorithms, data structures, and OOP principles.</td>
+                        <td>C++</td>
+                        <td>2020-2024</td>
+                    </tr>
+                    <tr>
+                        <td>Microcontroller Programming</td>
+                        <td>Created a room temperature reader using an Arduino board and a temperature sensor.</td>
+                        <td>Arduino, C++</td>
+                        <td>2022</td>
+                    </tr>
+                    <tr>
+                        <td>Introduction to Embedded Systems</td>
+                        <td>Learned the fundamentals of embedded systems design and programming.</td>
+                        <td>Arduino, C++</td>
+                        <td>2022</td>
+                    </tr>
+                    <tr>
+                        <td>Transdisciplinary Projects</td>
+                        <td>Collaborated on projects that combined knowledge from different disciplines.</td>
+                        <td>C++, Python</td>
+                        <td>2024</td>
+                    </tr>
+                    <tr>
+                        <td>Computer Science University</td>
+                        <td>Continued studies in advanced programming and software development.</td>
+                        <td>C++, Java, Python</td>
+                        <td>2024-present</td>
+                    </tr>
+                    <tr>
+                        <td>Learning Java</td>
+                        <td>Started learning Java from books, focusing on core concepts.</td>
+                        <td>Java</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td>First GUI</td>
+                        <td>Created a JavaFX to-do list application.</td>
+                        <td>Java</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td>First Network Application</td>
+                        <td>Built a Nine Men's Morris network game in Java.</td>
+                        <td>Java</td>
+                        <td>2025-2026</td>
+                    </tr>
+                    <tr>
+                        <td>Simulation Programming</td>
+                        <td>Created Elevator and CAN Bus simulations in C++.</td>
+                        <td>C++</td>
+                        <td>2026</td>
+                    </tr>
+                    <tr>
+                        <td>Moving to Python</td>
+                        <td>Built a Tkinter GUI application for emotion analysis.</td>
+                        <td>Python</td>
+                        <td>2026</td>
+                    </tr>
+                    <tr>
+                        <td>Image Forgery Detection Course</td>
+                        <td>Enrolled in a course on forgery detection methods and algorithms.</td>
+                        <td>Python</td>
+                        <td>2026-current</td>
+                    </tr>
+                    <tr>
+                        <td>Modern Web Development</td>
+                        <td>Started learning modern web development techniques and frameworks.</td>
+                        <td>HTML, CSS, JavaScript</td>
+                        <td>2026</td>
+                    </tr>
+                    <tr>
+                        <td>IFM Labz Participation</td>
+                        <td>Developed a gaming console using Raspberry Pi Pico W and gained practical project experience.</td>
+                        <td>Raspberry Pi Pico W, C++</td>
+                        <td>2026-current</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-        <tr>
-            <td>First GUI</td>
-            <td>Created my first graphical user interface using JavaFX, a to-do list application.</td>
-            <td>Java</td>
-            <td>2025</td>
-        </tr>
-
-        <tr>
-            <td>First network application</td>
-            <td>Created my first network application using Java, a Nine Mens Morris game.</td>
-            <td>Java</td>
-            <td>2025-2026</td>
-        </tr>
-
-        <tr>
-            <td>Trying simulation programming</td>
-            <td>Explored simulation programming concepts using C++, creating an Elevator Simulation & CAN Bus Simulation.</td>
-            <td>C++</td>
-            <td>2026</td>
-        </tr>
-
-        <tr>
-            <td>Moving on to Python programming</td>
-            <td>Created a GUI application using Python and Tkinter, that analyses emotions.</td>
-            <td>Python</td>
-            <td>2026</td>
-        </tr>
-
-        <tr>
-            <td>Started a Image Forgery Detection course</td>
-            <td>Enrolled in a course on image forgery detection, learning about various techniques and algorithms.</td>
-            <td>Python</td>
-            <td>2026-current</td>
-        </tr>
-
-        <tr>
-            <td>Learning modern web development</td>
-            <td>Started learning modern web development techniques and frameworks.</td>
-            <td>HTML, CSS, JavaScript</td>
-            <td>2026</td>
-        </tr>
-
-        <tr>
-            <td>IFM Labz Participation</td>
-            <td>Participated in the IFM Labz program, developing a gaming console using a Raspberry Pi Pico W and gaining practical experience in hardware and software development.</td>
-            <td>Raspberry Pi Pico W, C++</td>
-            <td>2026-current</td>
-        </tr>
-    </tbody>
-    </table>
-
-    <h4 id="myWorkspace">My github profile: <a href="https://github.com/popam482">popam482</a></h4>
-
-    <img src="images/java.png" alt="Java logo" width="200" height="200">
-    <img src="images/c++.png" alt="C++ logo" width="200" height="200">
-    <img src="images/python.png" alt="Python logo" width="200" height="200">
-    <img src="images/simulation.png" alt="Simulation logo" width="200" height="200">
-    <img src="images/gui.png" alt="Gui logo" width="200" height="200">
+        <section class="section-card">
+            <h4 id="myWorkspace">My GitHub profile: <a href="https://github.com/popam482">popam482</a></h4>
+            <div class="logo-gallery">
+                <img src="images/java.png" alt="Java logo" width="200" height="200" loading="lazy">
+                <img src="images/c++.png" alt="C++ logo" width="200" height="200" loading="lazy">
+                <img src="images/python.png" alt="Python logo" width="200" height="200" loading="lazy">
+                <img src="images/simulation.png" alt="Simulation logo" width="200" height="200" loading="lazy">
+                <img src="images/gui.png" alt="GUI logo" width="200" height="200" loading="lazy">
+            </div>
+        </section>
+    </main>
 
     <footer>
-    <p>&copy; 2026 Maria's Portfolio. All rights reserved.</p>
-    <p>
-        <a href="https://github.com/popam482">GitHub</a> | 
-        <a href="mailto:popamaria482@gmail.com">Email</a>
-    </p>
-</footer>
-
+        <p>&copy; 2026 Maria's Portfolio. All rights reserved.</p>
+        <p>
+            <a href="https://github.com/popam482">GitHub</a> |
+            <a href="mailto:popamaria482@gmail.com">Email</a>
+        </p>
+    </footer>
 </body>
 </html>

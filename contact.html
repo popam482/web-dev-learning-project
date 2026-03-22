@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
-<body>  
+<body>
     <header>
-    <h1>Contact Me</h1>
-    <nav>
-         <ul style="display: flex; list-style-type: none; gap: 20px;">
-            <li><a href="startPage.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="skills.html" >Skills</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+        <h1 class="title">Contact Me</h1>
+        <nav class="navbar" aria-label="Main navigation">
+            <ul>
+                <li><a href="startPage.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="contact">
+    <main class="page-content">
+        <section id="contact" class="section-card">
             <h2>Get In Touch</h2>
             <form action="/submit" method="POST">
                 <div class="form-group">
@@ -37,17 +39,17 @@
                     <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
 
-                <button type="submit" class="cta">Send Message</button>
+                <button type="submit" class="btn">Send Message</button>
             </form>
         </section>
+    </main>
 
     <footer>
         <p>&copy; 2026 Maria's Portfolio. All rights reserved.</p>
         <p>
-            <a href="https://github.com/popam482">GitHub</a> | 
+            <a href="https://github.com/popam482">GitHub</a> |
             <a href="mailto:popamaria482@gmail.com">Email</a>
         </p>
     </footer>
-
 </body>
 </html>
