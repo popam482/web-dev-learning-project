@@ -106,10 +106,16 @@ header {
 h2,
 h3,
 h4 {
-    margin-top: 0;
     font-family: "Poppins", sans-serif;
     color: var(--green-700);
     line-height: 1.25;
+}
+
+#passions, 
+#offSchool, 
+#milestones, 
+#myWorkspace {
+  scroll-margin-top: 150px;
 }
 
 .jump-nav p {
@@ -197,9 +203,9 @@ dd {
 
 .data-table th,
 .data-table td {
+    text-align: center;
     border: 1px solid var(--border);
     padding: 10px;
-    text-align: left;
     vertical-align: top;
 }
 
@@ -221,12 +227,18 @@ dd {
     width: 100%;
     max-width: 180px;
     max-height: 180px;
+    filter: grayscale(100%);
     margin-inline: auto;
     display: block;
     background: #fff;
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 8px;
+}
+
+.logo-gallery img:hover{
+    filter: grayscale(0%);
+    transform: translateY(-2px);
 }
 
 #contact form {
