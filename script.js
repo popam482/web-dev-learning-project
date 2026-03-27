@@ -28,6 +28,23 @@ if(form){
             return;
         }
         alert('Thank you for your message, ' + name + '! You will receive a response at ' + email + ' soon.');
+        
+        const formData=new FormData(form);
+        fetch('send-email.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+        .then(data => {
+            if(data.success){
+                alert('Your message has been sent successfully!');
+            } else {
+                alert('There was an error sending your message. Please try again later.');
+            }
+        })
+        .catch(error => {
+            alert('There was an error sending your message. Please try again later.');
+        });
+
         form.reset();
     });
 }
