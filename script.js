@@ -53,3 +53,11 @@ if (themeToggle) {
         }
     });
 }
+
+const currentPage = window.location.pathname.split('/').pop() || 'startPage.html';
+document.querySelectorAll('.navbar a').forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+        link.style.color = 'var(--green-700)';
+        link.style.backgroundColor = 'var(--green-100)';
+    }
+});
