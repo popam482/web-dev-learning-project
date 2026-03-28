@@ -1,5 +1,17 @@
 const express = require('express');
-const app=express();
+const mongoose = require('mongoose');
+const Message = require('./models/Message');
+
+const app = express();
+const MONGO_URI = 'mongodb+srv://admin:Admin123@portfoliocluster.igiubo9.mongodb.net/?appName=PortfolioCluster';
+
+mongoose.connect(MONGO_URI)
+.then(() => {
+    console.log('Connected to MongoDB!');
+})
+.catch(err => {
+    console.error('Error connecting to MongoDB:', err);
+});
 
 app.use(express.json());
 
@@ -17,19 +29,32 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/api/messages', (req, res) => {
-    const { name, email, message } = req.body;
-    if(!name || !email || !message){
-        return res.status(400).json({
+app.post('/api/messages', async(req, res) => {
+    try {
+        const { name, email, message } = req.body;
+        if(!name || !email || !message){
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required'
+            });
+        }
+
+        const newMessage = new Message({name, email, message});
+        await newMessage.save();
+
+        console.log('Received message:', { name, email, message });
+
+        res.json({
+            success: true,
+            message: 'Message received successfully'
+        });
+    } catch (error) {
+        console.error('Error saving message:', error);
+        res.status(500).json({
             success: false,
-            message: 'All fields are required'
+            message: 'Error saving message'
         });
     }
-    console.log('Received message:', { name, email, message });
-    res.json({
-        success: true,
-        message: 'Message received successfully'
-    });
 });
 
 const PORT =3000;
