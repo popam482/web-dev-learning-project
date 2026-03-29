@@ -57,6 +57,52 @@ app.post('/api/messages', async(req, res) => {
     }
 });
 
+app.get('/api/messages', async(req, res) => {
+    try {
+        const messages = await Message.find().sort({ createdAt: -1 });
+        res.json({
+            success: true,
+            count: messages.length,
+            data: messages
+        });
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error fetching messages'
+        });
+    }
+});
+
+app.delete('/api/messages/:id', async(req, res) => {
+    try {
+        const {id} = req.params;
+        const deletedMessage = await Message.findByIdAndDelete(id);
+        if(!deletedMessage){
+            return res.status(404).json({
+                success: false, 
+                message: 'Message not found'
+            });
+        }
+        
+        console.log('Deleted message:', id);
+
+        res.json({
+            success: true,
+            message: 'Message deleted successfully'
+        });
+    } catch (error) {
+        console.error('Error deleting message:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting message'
+        });
+    }
+});
+
+
+
+
 const PORT =3000;
 app.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
