@@ -389,6 +389,18 @@ textarea:focus {
     transform: scale(0.95);
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 footer {
     margin-top: 30px;
     padding: 20px 16px 28px;
@@ -444,6 +456,7 @@ footer a:focus-visible {
 .section-card:nth-child(2) { animation-delay: 0.5s; }
 .section-card:nth-child(3) { animation-delay: 0.2s; }
 .section-card:nth-child(4) { animation-delay: 0.3s; }
+
 
 .hamburger {
     display: none;

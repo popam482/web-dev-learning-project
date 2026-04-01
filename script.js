@@ -79,6 +79,20 @@ document.querySelectorAll('.navbar a').forEach(link => {
     }
 });
 
+const reveals = document.querySelectorAll('.reveal');
+if (reveals.length) {
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => obs.observe(el));
+}
+
 const hamburger = document.getElementById('hamburger');
 const navbar = document.getElementById('navbar');
 if(hamburger){
