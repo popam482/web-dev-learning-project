@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+        <h1 class="title">My Portfolio</h1>
+
+         <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navbar" id="navbar" aria-label="Main navigation">
+            <ul>
+                <li><a href="startPage.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="messages.html">Messages</a></li>
+            </ul>
+        </nav>
+    
+</header>
+ <main class="page-content">
+    <section class="section-card reveal">
+      <div class="messages-toolbar">
+        <p class="messages-hint">
+          This page shows messages saved in MongoDB.
+        </p>
+        <button class="btn btn-small" id="refreshMessages">Refresh</button>
+      </div>
+      <div id="messagesStatus" class="messages-status">Loading…</div>
+      <div id="messagesList" class="messages-list"></div>
+    </section>
+  </main>
+
+  <footer>
+        <p>&copy; 2026 Maria's Portfolio. All rights reserved.</p>
+        <p>
+            <a href="https://github.com/popam482">GitHub</a> |
+            <a href="mailto:popamaria482@gmail.com">Email</a>
+        </p>
+    </footer>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
+  <script src="script.js"></script>
+</body>
+</html>
