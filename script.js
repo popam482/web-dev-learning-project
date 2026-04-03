@@ -29,22 +29,24 @@ if(form){
         }
         alert('Thank you for your message, ' + name + '! You will receive a response at ' + email + ' soon.');
         
-        const formData=new FormData(form);
-        fetch('send-email.php', {
+        fetch('http://localhost:3000/api/messages', {
             method: 'POST',
-            body: formData
-        }).then(response => response.json())
-        .then(data => {
-            if(data.success){
-                alert('Your message has been sent successfully!');
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message })
+            })
+            .then(r => r.json())
+            .then(data => {
+            if (data.success) {
+                alert('Sent!');
+                form.reset();
             } else {
-                alert('There was an error sending your message. Please try again later.');
+                alert(data.message || 'Error');
             }
         })
-        .catch(error => {
-            alert('There was an error sending your message. Please try again later.');
+        .catch(err => {
+            console.error(err);
+            alert('Failed to send');
         });
-
         form.reset();
     });
 }

@@ -9,10 +9,6 @@
     --shadow: 0 10px 30px rgba(46, 111, 64, 0.12);
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   flex-direction: column;
 }

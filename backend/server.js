@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Message = require('./models/Message');
 
 const app = express();
-const MONGO_URI = 'mongodb+srv://admin:Admin123@portfoliocluster.igiubo9.mongodb.net/?appName=PortfolioCluster';
+const MONGO_URI = 'mongodb://127.0.0.1:27017/web_learning_project';
 
 mongoose.connect(MONGO_URI)
 .then(() => {
@@ -103,7 +103,7 @@ app.delete('/api/messages/:id', async(req, res) => {
 
 
 
-const PORT =3000;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
     console.log('Visit http://localhost:' + PORT + ' to see the server response');
