@@ -358,6 +358,10 @@ textarea:focus {
     box-shadow: 0 8px 18px rgba(46, 111, 64, 0.22);
     outline: none;
 }
+    
+#submitBtn{
+    margin-top: 20px;
+}
 
 .section-card-skills {
     background-color: var(--surface);
