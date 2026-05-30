@@ -21,7 +21,7 @@
 
         <nav class="navbar" id="navbar" aria-label="Main navigation">
             <ul>
-                <li><a href="startPage.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="skills.html">Skills</a></li>
                 <li><a href="educationAndExperience.html">Education and Experience</a></li>
@@ -33,72 +33,14 @@
 
     <main class="page-content">
         <section class="section-card reveal">
-            <h2>Here are some of the projects I have worked on:</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Project Name</th>
-                        <th>Description</th>
-                        <th>Skills Acquired</th>
-                        <th>Tools Used</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Nine Men's Morris</td>
-                        <td>A socket-based multiplayer game implemented in Java.</td>
-                        <td>OOP principles, threading, sockets programming, database management.</td>
-                        <td>Java, JavaFX, SQL</td>
-                    </tr>
+            <h2>GitHub Portfolio:</h2>
 
-                    <tr>
-                        <td> NEXUS Gaming Console</td>
-                        <td>A custom gaming console built using Arduino and various sensors.</td>
-                        <td>Embedded systems, hardware integration, C++ programming.</td>
-                        <td>Arduino, C++</td>
-                    </tr>
+            <p id="repoStatus" class="repo-status">Loading projects…</p>
 
-                    <tr>
-                        <td>CAN Bus Simulation</td>
-                        <td>A simulation of a CAN bus car system using C++.</td>
-                        <td>System modeling, multithreaded C++ programming, simulation techniques.</td>
-                        <td>C++, Google Test</td>
-                    </tr>
-
-                    <tr>
-                        <td> Sibiu Parking Management</td>
-                        <td>A system for managing parking spaces in Sibiu with real-time availability updates.</td>
-                        <td>Database design, web development, user interface design.</td>
-                        <td>HTML, CSS, JavaScript, Firebase</td>
-                    </tr>
-
-                    <tr>
-                        <td>Emotion Journal</td>
-                        <td>An application for tracking and analyzing emotions over time with personalized insights.</td>
-                        <td>Python GUI, user experience design, data visualization.</td>
-                        <td>Python, Tkinter, OpenCV, DeepFace</td>
-                    </tr>
-                    <tr>
-                        <td>Elevator Simulator</td>
-                        <td>A C++ program for simulating elevator behavior and scheduling.</td>
-                        <td>C++ file management, algorithm design, OOP principles.</td>
-                        <td>C++, Google Test</td>
-                    </tr>
-                    <tr>
-                        <td>Green Index</td>
-                        <td>A Python program mapping Romania routes and landmarks.</td>
-                        <td>Data input, data validation, group collaboration.</td>
-                        <td>Python, JSON, Folium</td>
-                    </tr>
-                    <tr>
-                        <td>Expense Splitter</td>
-                        <td>A Java application for splitting expenses among friends or roommates.</td>
-                        <td>Java, UI design, CSV data handling.</td>
-                        <td>Java, JavaFX, CSV</td>
-                    </tr>
-
-                </tbody>
-            </table>
+            <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
+            <div class="repo-loadmore">
+            <button id="loadMoreBtn" class="btn" type="button">Load more</button>
+            </div>
         </section>
     </main>
 

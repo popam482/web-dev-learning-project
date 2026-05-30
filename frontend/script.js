@@ -295,3 +295,104 @@ function escapeHtml(str) {
 if (messagesListEl && messagesStatusEl) {
   loadMessages();
 }
+
+const isProjectsPage = window.location.pathname.endsWith('projects.html');
+
+const PAGE_SIZE = 6;
+let allRepos = [];
+let visibleCount = 0;
+
+function repoToCardHtml(repo) {
+  const name = repo.name || 'Unnamed repo';
+  const desc = repo.description ? escapeHtml(repo.description) : 'Fără descriere disponibilă';
+  const lang = repo.language ? escapeHtml(repo.language) : 'N/A';
+  const stars = Number(repo.stargazers_count || 0);
+  const forks = Number(repo.forks_count || 0);
+  const link = repo.html_url || '#';
+
+  return `
+    <article class="repo-card">
+      <h3>${escapeHtml(name)}</h3>
+      <p class="repo-desc">${desc}</p>
+
+      <div class="repo-meta">
+        <div class="repo-meta-row"><strong>Language:</strong> <span>${lang}</span></div>
+        <div class="repo-meta-row"><strong>Stars:</strong> <span>${stars}</span></div>
+        <div class="repo-meta-row"><strong>Forks:</strong> <span>${forks}</span></div>
+      </div>
+
+      <div class="repo-actions">
+        <a class="btn" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">
+          View on GitHub
+        </a>
+      </div>
+    </article>
+  `;
+}
+
+function updateLoadMoreUI() {
+  const status = document.getElementById('repoStatus');
+  const btn = document.getElementById('loadMoreBtn');
+  if (!status || !btn) return;
+
+  status.textContent = `Showing ${Math.min(visibleCount, allRepos.length)} of ${allRepos.length} repositories.`;
+
+  const hasMore = visibleCount < allRepos.length;
+  btn.style.display = hasMore ? 'inline-flex' : 'none';
+}
+
+function renderNextRepos() {
+  const grid = document.getElementById('repoGrid');
+  if (!grid) return;
+
+  const next = allRepos.slice(visibleCount, visibleCount + PAGE_SIZE);
+  grid.insertAdjacentHTML('beforeend', next.map(repoToCardHtml).join(''));
+
+  visibleCount += next.length;
+  updateLoadMoreUI();
+}
+
+async function loadGitHubRepos() {
+  const grid = document.getElementById('repoGrid');
+  const status = document.getElementById('repoStatus');
+  const btn = document.getElementById('loadMoreBtn');
+
+  if (!grid || !status || !btn) return;
+
+  status.textContent = 'Loading projects…';
+  grid.innerHTML = '';
+  btn.style.display = 'none';
+
+  const username = 'popam482';
+  const url = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+
+    const repos = await res.json();
+
+    allRepos = (repos || [])
+      .filter(r => r && r.fork === false)
+      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+    visibleCount = 0;
+
+    if (allRepos.length === 0) {
+      status.textContent = 'No repositories found.';
+      return;
+    }
+
+    renderNextRepos();
+
+    btn.onclick = () => renderNextRepos();
+
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Ups! Nu am putut încărca proiectele momentan.';
+  }
+}
+
+if (isProjectsPage) {
+  loadGitHubRepos();
+}
