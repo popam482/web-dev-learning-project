@@ -442,12 +442,15 @@ function renderNextRepos() {
 
 async function loadGitHubRepos() {
   const grid = document.getElementById('repoGrid');
-  const status = document.getElementById('repoStatus');
+  const statusText = document.getElementById('repoStatusText');
+  const spinner = document.querySelector('#repoStatus .spinner');
   const btn = document.getElementById('loadMoreBtn');
 
-  if (!grid || !status || !btn) return;
+  if (!grid || !statusText || !btn) return;
 
-  status.textContent = 'Loading projects…';
+
+  statusText.textContent = 'Loading projects…';
+  if (spinner) spinner.style.display = 'inline-block';
   grid.innerHTML = '';
   btn.style.display = 'none';
 
@@ -455,29 +458,60 @@ async function loadGitHubRepos() {
   const url = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`;
 
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    let res;
+
+    try {
+      res = await fetch(url);
+    } catch (networkErr) {
+      throw new Error('network_error');
+    }
+
+    if (!res.ok) {
+      if (res.status === 403) throw new Error('rate_limit');
+      if (res.status === 404) throw new Error('user_not_found');
+      throw new Error(`http_${res.status}`);
+    }
 
     const repos = await res.json();
 
-    rawRepos = (repos || [])
-  .filter(r => r && r.fork === false);
+    rawRepos = (repos || []).filter(r => r && r.fork === false);
 
     if (rawRepos.length === 0) {
-      status.textContent = 'No repositories found.';
+      statusText.textContent = 'No repositories found.';
+      if (spinner) spinner.style.display = 'none';
+      btn.style.display = 'none';
+      grid.innerHTML = '';
       return;
     }
 
-  buildLanguageOptions(rawRepos); 
-  wireRepoControls();
+    buildLanguageOptions(rawRepos);
+    wireRepoControls();
+    applyRepoFilters(); 
 
-  applyRepoFilters();
+    if (spinner) spinner.style.display = 'none';
 
-  btn.onclick = () => renderNextRepos();
+    btn.onclick = () => renderNextRepos();
 
   } catch (err) {
     console.error(err);
-    status.textContent = 'Oops, failed to load projects.';
+
+    grid.innerHTML = '';
+    btn.style.display = 'none';
+    if (spinner) spinner.style.display = 'none';
+
+    if (err.message === 'rate_limit') {
+      statusText.textContent =
+        'Oops! You have hit the GitHub API rate limit. Please try again later.';
+    } else if (err.message === 'user_not_found') {
+      statusText.textContent =
+        'Oops! The GitHub user was not found. Please check the username.';
+    } else if (err.message === 'network_error') {
+      statusText.textContent =
+        'Oops! There is no internet connection or GitHub is not responding at the moment.';
+    } else {
+      statusText.textContent =
+        'Oops! We could not load the projects at the moment.';
+    }
   }
 }
 
