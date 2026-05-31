@@ -89,15 +89,15 @@ const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme');
 
 if (savedTheme === 'dark') {
-  document.body.classList.add('dark-mode');
+  document.documentElement.classList.add('dark-mode');
   if (themeToggle) themeToggle.textContent = '☀️';
 }
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
+    document.documentElement.classList.toggle('dark-mode');
 
-    if (document.body.classList.contains('dark-mode')) {
+    if (document.documentElement.classList.contains('dark-mode')) {
       localStorage.setItem('theme', 'dark');
       themeToggle.textContent = '☀️';
     } else {
@@ -108,7 +108,7 @@ if (themeToggle) {
 }
 
 // ---------- NAV ACTIVE LINK ----------
-const currentPage = window.location.pathname.split('/').pop() || 'startPage.html';
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.navbar a').forEach(link => {
   if (link.getAttribute('href') === currentPage) {
     link.style.color = 'var(--green-700)';
@@ -302,6 +302,9 @@ const PAGE_SIZE = 6;
 let allRepos = [];
 let visibleCount = 0;
 
+let rawRepos = []; 
+let filteredRepos = [];  
+
 function repoToCardHtml(repo) {
   const name = repo.name || 'Unnamed repo';
   const desc = repo.description ? escapeHtml(repo.description) : 'Fără descriere disponibilă';
@@ -328,6 +331,91 @@ function repoToCardHtml(repo) {
       </div>
     </article>
   `;
+}
+
+function normalize(str) {
+  return String(str || '').toLowerCase();
+}
+
+function buildLanguageOptions(repos) {
+  const select = document.getElementById('repoLanguage');
+  if (!select) return;
+
+  const langs = new Set();
+  repos.forEach(r => {
+    if (r && r.language) langs.add(r.language);
+  });
+
+  const sorted = Array.from(langs).sort((a, b) => a.localeCompare(b));
+
+  select.innerHTML = `<option value="all">All</option>` + sorted
+    .map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`)
+    .join('');
+}
+
+function applyRepoFilters() {
+  const searchEl = document.getElementById('repoSearch');
+  const langEl = document.getElementById('repoLanguage');
+  const sortEl = document.getElementById('repoSort');
+
+  const q = normalize(searchEl?.value);
+  const lang = langEl?.value || 'all';
+  const sort = sortEl?.value || 'updated';
+
+  filteredRepos = rawRepos.filter(r => {
+    if (!r) return false;
+
+    const matchesLang = (lang === 'all') || (r.language === lang);
+
+    const hay = normalize(r.name) + ' ' + normalize(r.description);
+    const matchesSearch = !q || hay.includes(q);
+
+    return matchesLang && matchesSearch;
+  });
+
+  if (sort === 'updated') {
+    filteredRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+  } else if (sort === 'stars') {
+    filteredRepos.sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0));
+  } else if (sort === 'name') {
+    filteredRepos.sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')));
+  }
+
+  const grid = document.getElementById('repoGrid');
+  if (grid) grid.innerHTML = '';
+
+  allRepos = filteredRepos; 
+  visibleCount = 0;
+
+  if (allRepos.length === 0) {
+    const status = document.getElementById('repoStatus');
+    const btn = document.getElementById('loadMoreBtn');
+    if (status) status.textContent = 'No repositories match your filters.';
+    if (btn) btn.style.display = 'none';
+    return;
+  }
+
+  renderNextRepos();
+}
+
+function wireRepoControls() {
+  const searchEl = document.getElementById('repoSearch');
+  const langEl = document.getElementById('repoLanguage');
+  const sortEl = document.getElementById('repoSort');
+  const resetEl = document.getElementById('repoReset');
+
+  if (searchEl) searchEl.addEventListener('input', () => applyRepoFilters());
+  if (langEl) langEl.addEventListener('change', () => applyRepoFilters());
+  if (sortEl) sortEl.addEventListener('change', () => applyRepoFilters());
+
+  if (resetEl) {
+    resetEl.addEventListener('click', () => {
+      if (searchEl) searchEl.value = '';
+      if (langEl) langEl.value = 'all';
+      if (sortEl) sortEl.value = 'updated';
+      applyRepoFilters();
+    });
+  }
 }
 
 function updateLoadMoreUI() {
@@ -372,24 +460,24 @@ async function loadGitHubRepos() {
 
     const repos = await res.json();
 
-    allRepos = (repos || [])
-      .filter(r => r && r.fork === false)
-      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    rawRepos = (repos || [])
+  .filter(r => r && r.fork === false);
 
-    visibleCount = 0;
-
-    if (allRepos.length === 0) {
+    if (rawRepos.length === 0) {
       status.textContent = 'No repositories found.';
       return;
     }
 
-    renderNextRepos();
+  buildLanguageOptions(rawRepos); 
+  wireRepoControls();
 
-    btn.onclick = () => renderNextRepos();
+  applyRepoFilters();
+
+  btn.onclick = () => renderNextRepos();
 
   } catch (err) {
     console.error(err);
-    status.textContent = 'Ups! Nu am putut încărca proiectele momentan.';
+    status.textContent = 'Oops, failed to load projects.';
   }
 }
 

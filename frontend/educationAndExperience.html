@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+
+        <script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.classList.add('dark-mode');
+    } catch (e) {}
+  })();
+</script>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
@@ -78,3 +88,5 @@
     </footer>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
     <script src="script.js"></script>
+</body>
+</html>

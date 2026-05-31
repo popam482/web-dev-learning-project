@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.classList.add('dark-mode');
+    } catch (e) {}
+  })();
+</script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
@@ -42,7 +50,7 @@
       <p class="profile-role">Computer Engineering Student • Engineering Intern at Aumovio</p>
 
       <p class="profile-summary">
-        Second-year computer engineering student, passionate about embedded systems and modern web development.
+        Second-year computer engineering student, passionate about embedded systems, software development, and hardware integration.
       </p>
 
       <div class="profile-tags" aria-label="Preferred technologies">
